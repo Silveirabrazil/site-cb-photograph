@@ -1,0 +1,16 @@
+{
+    "name": "Conexão HostGator",
+    "protocol": "ftp",
+    "host": "ftp.cesarbrasil1752242622716.1990256.meusitehostgator.com.br",
+    "port": 21,
+    "username": "cesarbrasilfotografia@cesarbrasilfotografia.com.br",
+    "password": "SilveiraBR!@#2000",
+    "remotePath": "/public_html/",
+    "uploadOnSave": false,
+    "passive": true,
+    "secure": false,
+    "connectTimeout": 300000,
+    "protocolOptions": {
+        "keepalive": 30000
+    }
+}

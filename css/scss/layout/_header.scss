@@ -1,0 +1,248 @@
+/* --- 2. Navbar (Menu Superior) --- */
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1060;
+    background: linear-gradient( to bottom,rgba(0, 0, 0, 0.9),  rgba(0, 0, 0, 0.2));
+    box-shadow: var(--shadow-light);
+    transition: background 0.5s ease; /* MANTIDO A TRANSIÇÃO APENAS PARA BACKGROUND */
+    height: 12vw;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+.navbar {
+    padding: 3rem 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 2fr));
+    max-width: 85%;
+    margin: 0 auto;
+    border-radius: 5px;
+    /* This is key for mobile positioning, it needs to be relative regardless of desktop display */
+    position: relative;
+    /* For desktop, your existing grid-template-columns will handle the layout.
+       On mobile, we will override this with flexbox. */
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+    min-width: 120px;
+    transition: width 0.3s ease;
+}
+a.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Oculta o botão de menu hambúrguer por padrão em telas grandes */
+.menu-toggle {
+    display: none; /* Hidden by default on large screens */
+    font-size: 2.5rem;
+    color: #dcdcdc;
+    cursor: pointer;
+    z-index: 1070;
+    transition: color 0.3s ease;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.menu-toggle:hover {
+    color: rgb(207, 153, 69);
+}
+
+.menu {
+    display: flex; /* Your original desktop display */
+    align-items: center;
+    gap: 3rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #dcdcdc;
+    font-weight: 300;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+    padding: 0; /* As per your original code */
+}
+
+.menu a:hover {
+    color: rgb(207, 153, 69);
+}
+
+.menu li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    padding: 0; /* Corrected 'rem' to '0' as it was invalid */
+    border-radius: 2px;
+    text-align: center;
+    font-weight: 300;
+}
+
+/* --- Media Queries para Responsividade --- */
+
+/* Para telas até 1024px (tablets e notebooks pequenos) */
+@media (max-width: 1024px) {
+    header {
+        height: 15vw;
+        min-height: 85px;
+        padding: 0 15px;
+    }
+
+    .logo img {
+        width: auto;
+        height: 60%;
+        max-width: 250px;
+        min-width: 100px;
+    }
+
+    .menu {
+        gap: 2rem;
+    }
+
+    .menu a {
+        font-size: 1.3rem;
+    }
+}
+
+
+/* Para telas até 768px (tablets em modo retrato e celulares grandes) */
+@media (max-width: 768px) {
+    header {
+        height: 10vw;
+        min-height: 70px;
+        padding: 0 10px;
+    }
+
+    .navbar {
+        max-width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+        /* --- MOBILE CHANGES START HERE --- */
+        display: flex; /* Override grid-template-columns with flexbox for mobile */
+        justify-content: center; /* Center the logo */
+        align-items: center; /* Vertically align items in the navbar */
+    }
+
+    .logo {
+        /* Ensure the logo itself takes up enough space to be centered */
+        flex-grow: 1; /* Allow logo to grow and push other items (if any) away */
+        text-align: center; /* Ensures logo is centered within its flex item */
+    }
+
+    .logo img {
+        /* --- MOBILE IMAGE PROPORTIONS FIX --- */
+        width: auto;
+        height: 60%;
+        max-width: 200px; /* A more reasonable max-width for mobile */
+        min-width: 60px; /* A good minimum size */
+        margin-top: 0; /* Remove any desktop-specific top margin */
+        display: block; /* Important for margin: auto to work */
+        margin-left: auto; /* Center image within its flex item */
+        margin-right: auto; /* Center image within its flex item */
+    }
+
+    .menu {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        right: -50%;
+        width: 50%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        padding: 0;
+        margin: 0;
+        gap: 2rem;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        z-index: 1065;
+        transition: right 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        opacity: 0;
+        pointer-events: none;
+        /* Ensure it's a flex container when active */
+        display: flex;
+    }
+
+    .menu.active {
+        right: 0;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .menu a {
+        font-size: 1.8rem;
+        padding: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu li {
+        width: 80%;
+        margin: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0;
+    }
+
+    .menu li:last-child {
+        border-bottom: none;
+    }
+
+    /* --- MOBILE MENU TOGGLE FIX --- */
+    .menu-toggle {
+        display: block; /* Show hamburger icon */
+        position: absolute; /* Position absolutely within .navbar */
+        right: -50%; /* Position to the right, adjusting for navbar padding */
+        top: 50%; /* Vertically center */
+        transform: translateY(-50%); /* Fine-tune vertical centering */
+        /* Ensure it's above other elements if needed, though z-index 1070 is already high */
+        z-index: 1070;
+    }
+}
+
+/* Para telas até 480px (celulares pequenos) */
+@media (max-width: 480px) {
+    header {
+        height: 12vw;
+        min-height: 70px;
+        padding: 0 5px;
+    }
+
+    .navbar {
+        padding: 0 3px;
+        /* Ensure flexbox and centering are maintained */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo img {
+        /* --- SMALL MOBILE IMAGE PROPORTIONS FIX --- */
+        max-width: 150px; /* Adjusted max-width for very small screens */
+        min-width: 100px; /* Adjusted min-width for very small screens */
+    }
+
+    .menu-toggle {
+        font-size: 2rem;
+        right: -50; /* Adjust right position for very small screens */
+
+    }
+
+    .menu a {
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,119 @@
+//// Estilos para o overlay do pop-up de postagem
+.post-popup-overlay {
+    /* Centralização Horizontal com Flexbox, Alinhamento ao Topo */
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente o conteúdo */
+    align-items: center; /* Centraliza verticalmente (melhor para uma única imagem) */
+
+    /* Posicionamento fixo para flutuar sobre a página */
+    position: fixed; /* ESSENCIAL para flutuar sobre todo o conteúdo da página */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente para o efeito overlay */
+    z-index: 9999; /* MUITO IMPORTANTE: Garante que ele flutue acima de quase tudo */
+
+    /* Animação para aparecer e desaparecer */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    
+    box-sizing: border-box; 
+    padding: 10px; /* Padding geral para o overlay, para a imagem não colar nas bordas */
+}
+
+/* Estilos para o conteúdo do pop-up */
+//.post-popup {
+    /* Removido background e box-shadow */
+    background: transparent; /* Apenas transparente, sem cor de fundo */
+    box-shadow: none; /* Sem sombra, para que só a imagem "flutue" */
+    
+    border-radius: 5px; /* Removido border-radius (se a imagem tem, basta a imagem) */
+    text-align: center; /* Centraliza a imagem e o link internamente */
+    
+    width: auto; /* Largura se ajusta ao conteúdo */
+    
+    height: auto; /* Altura se ajusta ao conteúdo */
+    
+    
+    z-index: 11000; /* Pode ser maior que o overlay para garantir que esteja acima */
+
+    /* Animação */
+    transform: translateY(20px) scale(0.95); 
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    
+    padding: 0; /* IMPORTANTE: Remova qualquer padding aqui para a imagem não ter borda branca */
+    margin-top: 0; /* Remove margem superior se houver algum alinhamento indesejado */
+}
+
+/* Estado ativo: torna o overlay e o pop-up visíveis e animados */
+//.post-popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+//.post-popup.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Imagem dentro do pop-up */
+//.imgpopup {
+    border-radius: 5px;
+    display: block;
+    max-width: 100%;
+    width: 45vh;
+    height: 65%;
+    object-fit: contain;
+}
+
+/* Link que envolve a imagem */
+//.imgpopup-link {
+    display: block; /* Faz o link ocupar toda a área disponível */
+    line-height: 0; /* Remove qualquer espaço extra do link inline */
+    width: 100%; /* Garante que o link ocupe toda a largura do pop-up */
+}
+
+/* Botão de fechar no canto superior direito */
+//.post-popup .close-btn {
+    position: absolute;
+    top: -15px; /* Posição fora do pop-up */
+    right: -15px; /* Posição fora do pop-up */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #dc3545;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    z-index: 10; /* Acima da imagem */
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Sombra para o botão */
+}
+
+/* Media Queries para ajustes específicos */
+
+//@media (min-width: 768px) {
+    .post-popup {
+        max-width: px;
+    }
+    
+}
+
+//@media (max-width: 480px) {
+     
+    .post-popup {
+        max-width: 60%; /* Ocupa mais espaço em telas pequenas */
+    }
+    .post-popup .close-btn {
+        top: -10px;
+        right: -10px;
+        width: 30px;
+        height: 30px;
+    }
+} 

@@ -1,0 +1,106 @@
+/* --- 5. Seção de Apresentação --- */
+.apresentation {
+    width: 100%; /* Garante que a seção ocupe 100% da largura disponível */
+    max-width: 100%; /* Limita a largura máxima da seção em telas grandes */
+    margin: 2rem auto; /* Centraliza a seção horizontalmente e adiciona margens verticais */
+    min-height: 25vw; /* Altura mínima de 30% da altura da viewport em desktop */
+    background-color: rgba(0, 0, 0, 0.7); /* Cor de fundo da seção */
+    display: flex; /* Habilita Flexbox para alinhar itens */
+    align-items: center; /* Centraliza os itens filhos (foto e conteúdo) verticalmente */
+    gap: 1rem; /* Espaçamento entre a imagem e o conteúdo */
+}
+
+/* Regra mais específica para a imagem dentro de .apresentation */
+.apresentation img {
+    max-width: 20vw; /* Largura máxima da imagem em relação à viewport em desktop */
+    height: auto; /* Mantém a proporção da imagem (sempre use auto para height com width/max-width) */
+    display: block; /* Remove espaços extras indesejados abaixo da imagem */
+    flex-shrink: 0; /* Impede que a imagem encolha se não houver espaço suficiente */
+    object-fit: cover; /* Faz a imagem preencher o espaço sem distorcer, cortando o excesso */
+    border-radius: 5px; /* Adiciona bordas arredondadas à imagem */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Sombra suave na imagem */
+    margin: 2rem;
+}
+
+/* Contêiner para o nome e o parágrafo */
+.apresentation-content {
+    display: flex; /* Habilita Flexbox */
+    flex-direction: column; /* Coloca os itens filhos (nome e texto) em coluna */
+    text-align: left; /* Alinha o texto à esquerda por padrão */
+    flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
+    max-width: 75%; /* Define largura máxima para o bloco de texto para legibilidade */
+    
+}
+
+.apresentation .name h2 {
+    color: #e4e6e5;
+    font-family: var(--font-primary);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.apresentation p {
+    color: #e4e6e5;
+    font-family: var(--font-primary);
+    font-size: clamp(1rem, 1.6vw, 1.5rem);
+    line-height: 1.5;
+    margin-bottom: 0;
+    width: 85%; /* Ocupa toda a largura disponível do .apresentation-content */
+}
+
+/* --- Responsividade para Telas Menores (Mobile) --- */
+@media (max-width: 768px) {
+    .apresentation {
+        flex-direction: column; /* Em telas menores, foto fica em cima do texto */
+        padding: auto; /* Ajusta o preenchimento interno em telas menores */
+        width: 100%; /* Continua ocupando 100% da largura da tela */
+        min-height: auto; /* Remove a altura mínima fixa em mobile para se ajustar ao conteúdo */
+        margin: auto; /* Ajusta margem para mobile */
+        gap: 1.5rem; /* Ajusta espaçamento entre imagem e texto */
+        padding-bottom: 2rem;
+        padding-top:2rem ;
+        font-size: 1rem; /* Ajusta o tamanho da fonte para mobile */
+        
+    }
+
+    .apresentation img {
+       
+        max-width: 40vw; /* Limita o tamanho máximo da imagem em telas menores (ajuste conforme necessário) */
+        height: auto; /* Garante que a proporção da imagem é mantida */
+        margin-bottom: 0; /* Remove margem abaixo da foto pois o gap já a controla */
+    }
+
+    .apresentation-content {
+        max-width: 100%; /* Permite que o conteúdo ocupe toda a largura disponível */
+        align-items: center; /* Centraliza o conteúdo (nome e parágrafo) em telas menores */
+        text-align: center; /* Centraliza o texto dentro do contêiner em telas menores */
+        margin-left: 0; /* Remove a margem esquerda para centralizar em mobile */
+        padding: 0 ; /* Ajusta o padding para mobile */
+    }
+
+    /* As fontes agora são controladas pelo clamp em suas regras gerais,
+       então não precisamos de ajustes específicos aqui, a menos que queira
+       um comportamento MUITO diferente para mobile. O clamp já gerencia isso. */
+    /* .apresentation .name h2 {
+        font-size: 8vw; // Exemplo de um tamanho muito grande para mobile, evite se já usa clamp
+    }
+
+    .apresentation p {
+        font-size: 4vw; // Exemplo de um tamanho grande para mobile, evite se já usa clamp
+    } */
+}
+
+/* Considerar um breakpoint para telas muito grandes para limitar o 'vw' */
+@media (min-width: 1600px) {
+    .apresentation .name h2 {
+        font-size: 2rem; /* Fixa o tamanho máximo para h2 em telas muito grandes */
+    }
+
+    .apresentation p {
+        font-size: 1.5rem; /* Fixa o tamanho máximo para p em telas muito grandes */
+        padding-bottom: 2rem;
+        padding-top:2rem ;
+
+    }
+}

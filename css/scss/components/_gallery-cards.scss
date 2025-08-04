@@ -1,0 +1,152 @@
+/* _gallery-cards.scss (ou o nome do seu arquivo modular) */
+
+/* --- Seção da Galeria de Portfólio (Aplicável a todas as galerias com estas classes) --- */
+
+.portfolio-gallery-wrapper {
+    padding: 3rem 1.5rem;
+    background-color: transparent;
+    color: var(--color-light-grey); // Mantido: cor do texto do wrapper, se aplicável
+}
+
+.portfolio-category {
+    display: grid;
+    /* Configura o layout em grid com colunas responsivas */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Ajustado minmax para telas menores
+    gap: 2rem; /* Espaçamento entre os cards */
+    max-width: 1200px; /* Largura máxima da grade */
+    margin: 0 auto; /* Centraliza a grade na página */
+    justify-content: center;
+}
+
+.portfolio-card {
+    /* Propriedades base do card */
+    border-radius: 2px; /* Cantos arredondados */
+    overflow: hidden; /* Garante que o conteúdo não vaze dos cantos arredondados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra suave para profundidade */
+    text-decoration: none; /* Remove sublinhado se o card for um link */
+    display: block; // Garante que o .portfolio-card se comporte como um bloco
+    background-color: transparent; // O fundo branco virá do .card-text-content
+
+    // NOVO: Transição para o card completo no hover
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-5px); /* Efeito de "subir" no hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Sombra mais intensa no hover */
+}
+
+/* REMOVIDO: pseudo-elemento ::before e seus estilos, pois o overlay no hover não é mais necessário para o layout da imagem. */
+/* Se você quiser um efeito de escurecimento *apenas* na imagem no hover, você pode aplicá-lo à .card-image-wrapper img */
+
+/* Estilo do wrapper da imagem para manter a proporção */
+.card-image-wrapper {
+    width: 100%;
+    padding-bottom: 75%; /* Proporção 4:3 (altura é 75% da largura) */
+    position: relative;
+    overflow: hidden; /* Esconde partes da imagem que excedam o wrapper */
+}
+
+.card-image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+    object-position: center; /* Ajusta o foco da imagem para o centro */
+    transition: transform 0.3s ease; /* Transição para o zoom da imagem */
+}
+
+.portfolio-card:hover .card-image-wrapper img {
+    transform: scale(1.05); /* Pequeno zoom na imagem no hover */
+}
+
+/* NOVO: Contêiner para o texto que fica na parte branca abaixo da imagem */
+.card-text-content {
+    background-color: white; // Fundo branco como na imagem
+    padding: 1rem 1.5rem 1.5rem; // Espaçamento interno: topo, laterais, fundo
+    text-align: center; // Centraliza o texto
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; // Centraliza verticalmente o conteúdo (se houver espaço extra)
+    gap: 0.5rem; // Espaçamento entre os elementos de texto
+}
+
+/* Estilos para a Localização (Ex: RIO DE JANEIRO) */
+.card-location {
+    font-family: var(--font-primary); // Usando Dosis
+    font-size: 0.85rem; // Menor que o título
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888; // Cor cinza claro como na imagem
+    margin-bottom: 0.5rem; // Espaçamento abaixo da localização
+}
+
+
+/* Estilos para o Título Principal (Ex: CASAMENTO - JANA + MATT) */
+.card-title {
+    font-family: var(--font-primary); // Usando Dosis
+    font-size: 1.4rem; // Tamanho para o título principal
+    color: #333; // Cor escura como na imagem
+    margin: 0; // Remove margens padrão
+    line-height: 1.2;
+    font-weight: 600; // Mais forte como na imagem
+    text-transform: uppercase; // Maiúsculas como na imagem
+    padding: 0 0.2rem; // Pequeno padding horizontal para não colar
+}
+
+/* Estilos para o texto "VER FOTOS" */
+.card-view-photos {
+    font-family: var(--font-primary); // Usando Dosis
+    font-size: 0.8rem; // Tamanho menor
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #555; // Cor cinza escuro para o link
+    margin-top: 1rem; // Espaçamento acima do texto "VER FOTOS"
+    display: inline-block; // Para aplicar margens e paddings se necessário
+    // text-decoration: underline; // Adicionar sublinhado se desejar, não aparente na imagem
+    transition: color 0.3s ease; // Transição suave para a cor do texto
+}
+
+.portfolio-card:hover .card-view-photos {
+    color: var(--color-primary); // Mudar a cor do texto para a cor primária no hover
+}
+
+
+/* --- Media Queries para responsividade dos cards --- */
+
+@media (max-width: 768px) {
+    .portfolio-gallery-wrapper {
+        padding: 2rem 1rem;
+    }
+
+    .portfolio-category {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); // Ajuste para telas menores
+        gap: 1.5rem;
+    }
+
+    .card-location {
+        font-size: 0.75rem;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-view-photos {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-category {
+        grid-template-columns: 1fr; // Uma coluna em telas muito pequenas
+        gap: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+}
